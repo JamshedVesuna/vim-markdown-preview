@@ -1,7 +1,7 @@
 Vim Markdown Preview
 ====================
 
-A vim plugin for previewing markdown files in a browser. This plugin was designed to maintan focus on vim but use Google Chrome to preview rendered markdown. Thus, everything is done in the background so you never have to leave vim.
+A Vim plugin for previewing markdown files in a browser. This plugin was designed to maintain focus on vim but use Google Chrome to preview rendered markdown. Thus, everything is done in the background so you never have to leave Vim.
 
 Installation
 ============
@@ -16,12 +16,14 @@ Requirements
 
 Usage
 =====
-When in a *.markdown or *.md file, vim-markdown-preview maps `Ctrl-p` as follows:
+When in a *.markdown or *.md file, vim-markdown-preview does the following on a write to the buffer:
 
 * If you are not previewing the current file:
     * Open an html rendered version of your file in Google Chrome in the background.
 * Otherwise:
     * Refresh your preview of the current markdown file in Google Chrome.
+
+Uncomment the last line in `plugin/vim-markdown-preview.vim` to map `Ctrl-p` to the above instead of on write.
 
 Behind The Scenes
 =================

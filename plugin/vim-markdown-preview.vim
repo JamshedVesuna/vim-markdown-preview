@@ -7,7 +7,7 @@ function! Vim_Markdown_Preview()
   let curr_file = expand('%:t')
   call system('markdown ' . curr_file . ' > /tmp/vim-markdown-preview.html')
   let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - Google Chrome'")
-  sleep 31m
+  sleep 300m
   if !chrome_wid
     call system('see -g /tmp/vim-markdown-preview.html')
   else
@@ -21,4 +21,5 @@ function! Vim_Markdown_Preview()
   call system('rm /tmp/vim-markdown-preview.html')
 endfunction
 
-autocmd Filetype markdown,md map <buffer> <C-p> :call Vim_Markdown_Preview()<CR>
+autocmd BufWritePost *.markdown,*.md :call Vim_Markdown_Preview()
+"autocmd Filetype markdown,md map <buffer> <C-p> :call Vim_Markdown_Preview()<CR>
