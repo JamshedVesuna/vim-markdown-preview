@@ -3,6 +3,8 @@ Vim Markdown Preview
 
 A Vim plugin for previewing markdown files in a browser. This plugin was designed to maintain focus on vim but use Google Chrome to preview rendered markdown. Thus, everything is done in the background so you never have to leave Vim.
 
+![Screenshot](images/screenshot.gif?raw=true "Screenshot")
+
 Installation
 ============
 
