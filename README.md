@@ -18,14 +18,14 @@ Requirements
 
 Usage
 =====
-When in a *.markdown or *.md file, vim-markdown-preview does the following on a write to the buffer:
+When in a *.markdown or *.md file, vim-markdown-preview does the following when you type `Ctrl-p`:
 
 * If you are not previewing the current file:
     * Open an html rendered version of your file in Google Chrome in the background.
 * Otherwise:
     * Refresh your preview of the current markdown file in Google Chrome.
 
-Uncomment the last line in `plugin/vim-markdown-preview.vim` to map `Ctrl-p` to the above instead of on write.
+Uncomment the last line in `plugin/vim-markdown-preview.vim` to map a buffer write to the above instead of `Ctrl-p`.
 
 Behind The Scenes
 =================

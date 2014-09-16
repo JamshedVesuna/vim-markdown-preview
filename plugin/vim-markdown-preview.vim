@@ -21,5 +21,5 @@ function! Vim_Markdown_Preview()
   call system('rm /tmp/vim-markdown-preview.html')
 endfunction
 
-autocmd BufWritePost *.markdown,*.md :call Vim_Markdown_Preview()
-"autocmd Filetype markdown,md map <buffer> <C-p> :call Vim_Markdown_Preview()<CR>
+autocmd Filetype markdown,md map <buffer> <C-p> :call Vim_Markdown_Preview()<CR>
+"autocmd BufWritePost *.markdown,*.md :call Vim_Markdown_Preview()
