@@ -7,9 +7,9 @@ function! Vim_Markdown_Preview()
   let curr_file = expand('%:t')
   call system('markdown ' . curr_file . ' > /tmp/vim-markdown-preview.html')
   let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - Google Chrome'")
-  sleep 300m
   if !chrome_wid
-    call system('see -g /tmp/vim-markdown-preview.html')
+    sleep 300m
+    call system('see /tmp/vim-markdown-preview.html & > /dev/null &')
   else
     let curr_wid = system('xdotool getwindowfocus')
     call system('xdotool windowmap ' . chrome_wid)
@@ -17,7 +17,7 @@ function! Vim_Markdown_Preview()
     call system("xdotool key 'ctrl+r'")
     call system('xdotool windowactivate ' . curr_wid)
   endif
-  sleep 31m
+  sleep 700m
   call system('rm /tmp/vim-markdown-preview.html')
 endfunction
 
