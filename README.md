@@ -31,4 +31,4 @@ Behind The Scenes
 =================
 1. First, vim-markdown-preview renders your markdown as html and creates a temporary file `vim-markdown-preview.html` in `/tmp/`.
 2. Next, vim-markdown-preview then either opens the html file or refreshes the Google Chrome tab.
-3. Lastly, vim-markdown-preview removes the temporary file so nothing left behind.
+3. If you would like vim-markdown-preview to remove the temporary file so nothing left behind, uncomment lines 20 and 21.
