@@ -4,7 +4,7 @@
 "============================================================
 
 function! Vim_Markdown_Preview()
-  let curr_file = expand('%:t')
+  let curr_file = expand('%:p')
   call system('markdown ' . curr_file . ' > /tmp/vim-markdown-preview.html')
   let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - Google Chrome'")
   if !chrome_wid
