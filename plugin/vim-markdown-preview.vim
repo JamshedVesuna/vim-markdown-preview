@@ -99,9 +99,12 @@ endfunction
 "Maps Ctrl-p to Vim_Markdown_Preview()
 autocmd Filetype markdown,md map <buffer> <C-p> :call Vim_Markdown_Preview()<CR>
 
-"Maps Ctrl-p to Vim_Markdown_Preview_Local() - saves the html file locally and
-"displays images in path
+"Display images - Maps Ctrl-p to Vim_Markdown_Preview_Local() - saves the html file locally
+"and displays images in path
 "autocmd Filetype markdown,md map <buffer> <C-p> :call Vim_Markdown_Preview_Local()<CR>
+
+"Display images - Automatically call Vim_Markdown_Preview_Local() on buffer write
+"autocmd BufWritePost *.markdown,*.md :call Vim_Markdown_Preview_Local()
 
 "Automatically call Vim_Markdown_Preview() on buffer write
 "autocmd BufWritePost *.markdown,*.md :call Vim_Markdown_Preview()
