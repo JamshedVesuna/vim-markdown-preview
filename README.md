@@ -7,16 +7,34 @@ The aim of this plugin is to be light weight with minimal dependencies. Thus, th
 
 ![Screenshot](images/screenshot.gif?raw=true "Screenshot")
 
-Installation
+Installation<a name='installation'></a>
 ============
 
 1. With Pathogen: Place `vim-markdown-preview/` in `.vim/bundle/`.
 2. Default browsers:
     * OS X: Safari
     * Unix: Google Chrome
-    * To change browsers, edit [`vim_markdown_preview_browser`](https://github.com/JamshedVesuna/vim-markdown-preview/blob/master/plugin/vim-markdown-preview.vim#L7)
-3. Defaults to keeping rendered `.html` file
-    * To remove rendered preview, change [`REMOVE_TEMP_FILE`](https://github.com/JamshedVesuna/vim-markdown-preview/blob/master/plugin/vim-markdown-preview.vim#L6) to 1
+    * To change browsers, place the following in your `.vimrc` and replace `'Google Chrome'`:
+        * `let vim_markdown_preview_browser='Google Chrome'`
+3. Defaults to keeping rendered `.html` file.
+    * To remove the rendered preview, after loading it in a browser, add the following to your `.vimrc`:
+        * `let vim_markdown_preview_temp_file=1`
+4. In combination with the above, defaults to mapping `Ctrl-p` to preview without displaying images.
+    * To display images with the `Ctrl-p` mapping, add:
+        * `let vim_markdown_preview_toggle=1`
+    * To display images automatically on buffer write, add:
+        * `let vim_markdown_preview_toggle=2`
+    * To disregard images and still automatically preview on buffer write, add:
+        * `let vim_markdown_preview_toggle=3`
+
+The following example is using the write buffer option on OS X, with displaying images in the markdown preview, adding the following to `.vimrc`:
+
+```vim
+let vim_markdown_preview_temp_file=1
+let vim_markdown_preview_toggle=2
+```
+
+![Screenshot](images/screenshot-with-images.gif?raw=true "Screenshot With Images")
 
 Support and Requirements
 ========================
@@ -34,26 +52,13 @@ Support and Requirements
 
 Usage
 =====
-When in a *.markdown or *.md file, vim-markdown-preview does the following when you type `Ctrl-p` (can be remapped, see below):
+When in a *.markdown or *.md file, vim-markdown-preview does the following when you type `Ctrl-p` (can be remapped, see [Installation](#installation)):
 
 * If you are not previewing the current file:
     * Open an html rendered version of your file in Google Chrome or Safari in the background.
 * Otherwise:
     * Refresh your preview of the current markdown file in Google Chrome or Safari.
 
-## Remapping Hotkeys
-Please recomment current mapping if you chose to use another mapping.
-
-* Map to buffer write:
-    * Uncomment the [last line of](https://github.com/JamshedVesuna/vim-markdown-preview/blob/master/plugin/vim-markdown-preview.vim#L110) `plugin/vim-markdown-preview.vim`
-* Map to buffer write and enable image viewing:
-    * Uncomment the [fourth to last line](https://github.com/JamshedVesuna/vim-markdown-preview/blob/master/plugin/vim-markdown-preview.vim#L107) of `plugin/vim-markdown-preview.vim`
-* Map `Ctrl-p` to view images:
-    * Uncomment the [seventh to last line](https://github.com/JamshedVesuna/vim-markdown-preview/blob/master/plugin/vim-markdown-preview.vim#L104) in `plugin/vim-markdown-preview.vim`.
-
-The following example is using the write buffer option on OS X, with displaying images in the markdown preview:
-
-![Screenshot](images/screenshot-with-images.gif?raw=true "Screenshot With Images")
 
 Behind The Scenes
 =================
