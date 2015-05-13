@@ -14,6 +14,9 @@ Installation
 2. Default browsers:
     * OS X: Safari
     * Unix: Google Chrome
+    * To change browsers, edit [`vim_markdown_preview_browser`](https://github.com/JamshedVesuna/vim-markdown-preview/blob/master/plugin/vim-markdown-preview.vim#L7)
+3. Defaults to keeping rendered `.html` file
+    * To remove rendered preview, change [`REMOVE_TEMP_FILE`](https://github.com/JamshedVesuna/vim-markdown-preview/blob/master/plugin/vim-markdown-preview.vim#L6) to 1
 
 Support and Requirements
 ========================
