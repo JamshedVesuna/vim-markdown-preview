@@ -3,11 +3,12 @@
 "   git@github.com:JamshedVesuna/vim-markdown-preview.git
 "============================================================
 
+let b:REMOVE_TEMP_FILE = 0  "To remove the temp file, set to 1
+let b:vim_markdown_preview_browser = 'Google Chrome'
+
 function! Vim_Markdown_Preview()
 
-  let BROWSER = 'google-chrome'
   let OSNAME = 'Unidentified'
-  let REMOVE_TEMP_FILE = 0  "To remove the temp file, set to 1
 
   if has('win32')
     " Not yet used
@@ -18,17 +19,15 @@ function! Vim_Markdown_Preview()
   endif
   if has('mac')
     let OSNAME = 'mac'
-    let BROWSER = 'safari'
   endif
 
   let curr_file = expand('%:p')
   call system('markdown ' . curr_file . ' > /tmp/vim-markdown-preview.html')
 
-  if OSNAME == 'unix' && BROWSER == 'google-chrome'
-    let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - Google Chrome'")
+  if OSNAME == 'unix'
+    let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - " . b:vim_markdown_preview_browser . "'")
     if !chrome_wid
-      "sleep 300m
-      call system('see /tmp/vim-markdown-preview.html & > /dev/null &')
+      call system('see /tmp/vim-markdown-preview.html &> /dev/null &')
     else
       let curr_wid = system('xdotool getwindowfocus')
       call system('xdotool windowmap ' . chrome_wid)
@@ -36,14 +35,14 @@ function! Vim_Markdown_Preview()
       call system("xdotool key 'ctrl+r'")
       call system('xdotool windowactivate ' . curr_wid)
     endif
-    "sleep 700m
   endif
 
-  if OSNAME == 'mac' && BROWSER == 'safari'
+  if OSNAME == 'mac'
     call system('open -g /tmp/vim-markdown-preview.html')
   endif
 
-  if REMOVE_TEMP_FILE
+  if b:REMOVE_TEMP_FILE
+    sleep 200m
     call system('rm /tmp/vim-markdown-preview.html')
   endif
 endfunction
@@ -52,9 +51,7 @@ endfunction
 "Renders html locally and displays images
 function! Vim_Markdown_Preview_Local()
 
-  let BROWSER = 'google-chrome'
   let OSNAME = 'Unidentified'
-  let REMOVE_TEMP_FILE = 0  "To remove the temp file, set to 1
 
   if has('win32')
     " Not yet used
@@ -65,17 +62,15 @@ function! Vim_Markdown_Preview_Local()
   endif
   if has('mac')
     let OSNAME = 'mac'
-    let BROWSER = 'safari'
   endif
 
   let curr_file = expand('%:p')
   call system('markdown ' . curr_file . ' > ' . curr_file . '.html')
 
-  if OSNAME == 'unix' && BROWSER == 'google-chrome'
-    let chrome_wid = system("xdotool search --name '". curr_file . ".html - Google Chrome'")
+  if OSNAME == 'unix'
+    let chrome_wid = system("xdotool search --name '". curr_file . ".html - " . b:vim_markdown_preview_browser . "'")
     if !chrome_wid
-      "sleep 300m
-      call system('see ' . curr_file . '.html & > /dev/null &')
+      call system('see ' . curr_file . '.html &> /dev/null &')
     else
       let curr_wid = system('xdotool getwindowfocus')
       call system('xdotool windowmap ' . chrome_wid)
@@ -83,14 +78,14 @@ function! Vim_Markdown_Preview_Local()
       call system("xdotool key 'ctrl+r'")
       call system('xdotool windowactivate ' . curr_wid)
     endif
-    "sleep 700m
   endif
 
-  if OSNAME == 'mac' && BROWSER == 'safari'
+  if OSNAME == 'mac'
     call system('open -g ' . curr_file . '.html')
   endif
 
-  if REMOVE_TEMP_FILE
+  if b:REMOVE_TEMP_FILE
+    sleep 200m
     call system('rm ' . curr_file . '.html')
   endif
 endfunction
