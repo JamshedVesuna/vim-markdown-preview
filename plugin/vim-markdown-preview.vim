@@ -4,7 +4,7 @@
 "============================================================
 
 let b:REMOVE_TEMP_FILE = 0  "To remove the temp file, set to 1
-let b:vim_markdown_preview_browser = 'Google Chrome'
+let b:vim_markdown_preview_browser = get(g:, 'vim_markdown_preview_browser', 'Google Chrome')
 
 function! Vim_Markdown_Preview()
 
