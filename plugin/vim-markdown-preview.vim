@@ -41,7 +41,7 @@ function! Vim_Markdown_Preview()
     call system('open -g /tmp/vim-markdown-preview.html')
   endif
 
-  if b:REMOVE_TEMP_FILE
+  if b:REMOVE_TEMP_FILE == 1
     sleep 200m
     call system('rm /tmp/vim-markdown-preview.html')
   endif
@@ -84,7 +84,7 @@ function! Vim_Markdown_Preview_Local()
     call system('open -g ' . curr_file . '.html')
   endif
 
-  if b:REMOVE_TEMP_FILE
+  if b:REMOVE_TEMP_FILE == 1
     sleep 200m
     call system('rm ' . curr_file . '.html')
   endif
