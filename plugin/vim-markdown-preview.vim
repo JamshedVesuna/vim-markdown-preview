@@ -72,7 +72,12 @@ function! Vim_Markdown_Preview_Local()
   endif
 
   let curr_file = expand('%:p')
-  call system('markdown ' . curr_file . ' > ' . curr_file . '.html')
+
+  if b:vim_markdown_preview_github == 1
+    call system('grip ' . curr_file . ' --export /tmp/vim-markdown-preview.html')
+  else
+    call system('markdown ' . curr_file . ' > /tmp/vim-markdown-preview.html')
+  endif
 
   if OSNAME == 'unix'
     let chrome_wid = system("xdotool search --name '". curr_file . ".html - " . b:vim_markdown_preview_browser . "'")
