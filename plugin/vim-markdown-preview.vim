@@ -6,6 +6,7 @@
 let b:vim_markdown_preview_browser = get(g:, 'vim_markdown_preview_browser', 'Google Chrome')
 let b:vim_markdown_preview_temp_file = get(g:, 'vim_markdown_preview_temp_file', 0)
 let b:vim_markdown_preview_toggle = get(g:, 'vim_markdown_preview_toggle', 0)
+let b:vim_markdown_preview_github = get(g:, 'vim_markdown_preview_github', 0)
 
 function! Vim_Markdown_Preview()
 
@@ -23,7 +24,12 @@ function! Vim_Markdown_Preview()
   endif
 
   let curr_file = expand('%:p')
-  call system('markdown ' . curr_file . ' > /tmp/vim-markdown-preview.html')
+
+  if b:vim_markdown_preview_github == 1
+    call system('grip ' . curr_file . ' --export /tmp/vim-markdown-preview.html')
+  else
+    call system('markdown ' . curr_file . ' > /tmp/vim-markdown-preview.html')
+  endif
 
   if OSNAME == 'unix'
     let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - " . b:vim_markdown_preview_browser . "'")
