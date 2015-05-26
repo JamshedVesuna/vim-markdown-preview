@@ -26,8 +26,10 @@ Installation<a name='installation'></a>
         * `let vim_markdown_preview_toggle=2`
     * To disregard images and still automatically preview on buffer write, add:
         * `let vim_markdown_preview_toggle=3`
-5. If you prefer github flavoured markdown you need to install grip (tested only on ubuntu) and set next option:
+5. If you prefer [GitHub flavoured markdown](https://help.github.com/articles/github-flavored-markdown/) you need to install [Python grip](https://github.com/joeyespo/grip) and add:
     * `let vim_markdown_preview_github=1`
+    * Note that this makes a request to [GitHub's API](https://developer.github.com/v3/markdown/) (causing latencies) and may require [authentication](https://github.com/joeyespo/grip#access).
+    * Requires a network connection
 
 The following example is using the write buffer option on OS X, with displaying images in the markdown preview, adding the following to `.vimrc`:
 
@@ -43,12 +45,12 @@ Support and Requirements
 
 ## OS X:
 
-* [Markdown](http://daringfireball.net/projects/markdown/)
+* [Markdown](http://daringfireball.net/projects/markdown/) or [grip](https://github.com/joeyespo/grip) (for GitHub flavored markdown)
 * [Safari](https://www.apple.com/safari/)
 
 ## Unix:
 
-* [Markdown](http://daringfireball.net/projects/markdown/) or [grip](https://github.com/joeyespo/grip) if you want to parse github flavoured markdown
+* [Markdown](http://daringfireball.net/projects/markdown/) or [grip](https://github.com/joeyespo/grip) (for GitHub flavored markdown)
 * [xdotool](https://github.com/jordansissel/xdotool)
 * [Google Chrome](https://www.google.com/chrome/browser/) or [other browser](https://github.com/JamshedVesuna/vim-markdown-preview/wiki/Use-other-browser-to-preview-markdown#ubuntu-or-debian)
 
@@ -72,9 +74,3 @@ Behind The Scenes
     1. First, vim-markdown-preview renders your markdown as html with the filename `<your-file>.md.html` in the same directory.
     2. Next, vim-markdown-preview either opens the html file or refreshes the Google Chrome or Safari tab.
     3. There is currently no option to remove this file after previewing.
-
-Know issues
-===========
-* If you've chosen to use github flavoured markdown (with grip), there might some issues:
-    * necessity to use [access token](https://github.com/joeyespo/grip#access) (a solution is to set `alias grip="grip --user <your-username> --pass <your-pass>` in your ***.bashrc/.zshrc***).
-    * if github is unresponsive you wont be able to render your file.
