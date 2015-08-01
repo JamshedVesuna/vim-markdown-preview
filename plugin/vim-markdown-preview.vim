@@ -74,9 +74,10 @@ function! Vim_Markdown_Preview_Local()
   let curr_file = expand('%:p')
 
   if b:vim_markdown_preview_github == 1
-    call system('grip ' . curr_file . ' --export /tmp/vim-markdown-preview.html')
+    call system('grip ' . curr_file . ' --export ' . curr_file . '.html')
   else
-    call system('markdown ' . curr_file . ' > /tmp/vim-markdown-preview.html')
+    call system('markdown ' . curr_file . ' > ' . curr_file . '.html')
+
   endif
 
   if OSNAME == 'unix'
