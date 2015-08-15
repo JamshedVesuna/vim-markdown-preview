@@ -8,6 +8,10 @@ let b:vim_markdown_preview_temp_file = get(g:, 'vim_markdown_preview_temp_file',
 let b:vim_markdown_preview_toggle = get(g:, 'vim_markdown_preview_toggle', 0)
 let b:vim_markdown_preview_github = get(g:, 'vim_markdown_preview_github', 0)
 
+if !exists("g:vim_markdown_preview_hotkey")
+    let g:vim_markdown_preview_hotkey='<C-p>'
+endif
+
 function! Vim_Markdown_Preview()
 
   let OSNAME = 'Unidentified'
@@ -104,12 +108,12 @@ function! Vim_Markdown_Preview_Local()
 endfunction
 
 if b:vim_markdown_preview_toggle == 0
-  "Maps Ctrl-p to Vim_Markdown_Preview()
-  autocmd Filetype markdown,md map <buffer> <C-p> :call Vim_Markdown_Preview()<CR>
+  "Maps vim_markdown_preview_hotkey to Vim_Markdown_Preview()
+  :exec 'autocmd Filetype markdown,md map <buffer> ' . g:vim_markdown_preview_hotkey . ' :call Vim_Markdown_Preview()<CR>'
 elseif b:vim_markdown_preview_toggle == 1
-  "Display images - Maps Ctrl-p to Vim_Markdown_Preview_Local() - saves the html file locally
+  "Display images - Maps vim_markdown_preview_hotkey to Vim_Markdown_Preview_Local() - saves the html file locally
   "and displays images in path
-  autocmd Filetype markdown,md map <buffer> <C-p> :call Vim_Markdown_Preview_Local()<CR>
+  :exec 'autocmd Filetype markdown,md map <buffer> ' . g:vim_markdown_preview_hotkey . ' :call Vim_Markdown_Preview_Local()<CR>'
 elseif b:vim_markdown_preview_toggle == 2
   "Display images - Automatically call Vim_Markdown_Preview_Local() on buffer write
   autocmd BufWritePost *.markdown,*.md :call Vim_Markdown_Preview_Local()

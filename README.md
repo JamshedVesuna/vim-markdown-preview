@@ -11,22 +11,24 @@ Installation<a name='installation'></a>
 ============
 
 1. With Pathogen: Place `vim-markdown-preview/` in `.vim/bundle/`.
-2. Default browsers:
+2. To remap Control-p to a different hotkey, place the following in your `.vimrc`, replacing `p`:
+    * `let vim_markdown_preview_hotkey='<C-p>'`
+3. Default browsers:
     * OS X: Safari
     * Unix: Google Chrome
     * To change browsers, place the following in your `.vimrc` and replace `'Google Chrome'`:
         * `let vim_markdown_preview_browser='Google Chrome'`
-3. Defaults to keeping rendered `.html` file.
+4. Defaults to keeping rendered `.html` file.
     * To remove the rendered preview, after loading it in a browser, add the following to your `.vimrc`:
         * `let vim_markdown_preview_temp_file=1`
-4. In combination with the above, defaults to mapping `Ctrl-p` to preview without displaying images.
+5. In combination with the above, defaults to mapping `Ctrl-p` to preview without displaying images.
     * To display images with the `Ctrl-p` mapping, add:
         * `let vim_markdown_preview_toggle=1`
     * To display images automatically on buffer write, add:
         * `let vim_markdown_preview_toggle=2`
     * To disregard images and still automatically preview on buffer write, add:
         * `let vim_markdown_preview_toggle=3`
-5. If you prefer [GitHub flavoured markdown](https://help.github.com/articles/github-flavored-markdown/) you need to install [Python grip](https://github.com/joeyespo/grip) and add:
+6. If you prefer [GitHub flavoured markdown](https://help.github.com/articles/github-flavored-markdown/) you need to install [Python grip](https://github.com/joeyespo/grip) and add:
     * `let vim_markdown_preview_github=1`
     * Note that this makes a request to [GitHub's API](https://developer.github.com/v3/markdown/) (causing latencies) and may require [authentication](https://github.com/joeyespo/grip#access).
     * Requires a network connection
