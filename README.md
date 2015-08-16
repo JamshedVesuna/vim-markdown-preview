@@ -1,78 +1,148 @@
 Vim Markdown Preview
 ====================
 
-A Vim plugin for previewing markdown files in a browser. This plugin was designed to maintain focus on Vim but use Google Chrome or Safari to preview rendered markdown. Thus, everything is done in the background so you never have to leave Vim.
+- [Intro](#intro)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Requirements](#requirements)
+    - [Max OS X](#mac-os-x)
+    - [Unix](#unix)
+- [Options](#options)
+    - [Image rendering & save on buffer write](#toggle)
+    - [Hotkey](#hotkey)
+    - [Browser](#browser)
+    - [Temp File](#temp)
+    - [Github Flavoured Markdown](#github)
+- [Behind the Scenes](#behind-the-scenes)
 
-The aim of this plugin is to be light weight with minimal dependencies. Thus, there is no polling engine or webserver involved.
+Intro
+-----
+A small Vim plugin for previewing markdown files in a browser.
 
-![Screenshot](images/screenshot.gif?raw=true "Screenshot")
+The aim of this plugin is to be light weight with minimal dependencies. Thus, there is *no* polling engine or webserver involved.
 
-Installation<a name='installation'></a>
-============
+![Screenshot](images/screenshot.gif?raw=true "Preview on buffer write using Unix")
 
-1. With Pathogen: Place `vim-markdown-preview/` in `.vim/bundle/`.
-2. To remap Control-p to a different hotkey, place the following in your `.vimrc`, replacing `p`:
-    * `let vim_markdown_preview_hotkey='<C-p>'`
-3. Default browsers:
-    * OS X: Safari
-    * Unix: Google Chrome
-    * To change browsers, place the following in your `.vimrc` and replace `'Google Chrome'`:
-        * `let vim_markdown_preview_browser='Google Chrome'`
-4. Defaults to keeping rendered `.html` file.
-    * To remove the rendered preview, after loading it in a browser, add the following to your `.vimrc`:
-        * `let vim_markdown_preview_temp_file=1`
-5. In combination with the above, defaults to mapping `Ctrl-p` to preview without displaying images.
-    * To display images with the `Ctrl-p` mapping, add:
-        * `let vim_markdown_preview_toggle=1`
-    * To display images automatically on buffer write, add:
-        * `let vim_markdown_preview_toggle=2`
-    * To disregard images and still automatically preview on buffer write, add:
-        * `let vim_markdown_preview_toggle=3`
-6. If you prefer [GitHub flavoured markdown](https://help.github.com/articles/github-flavored-markdown/) you need to install [Python grip](https://github.com/joeyespo/grip) and add:
-    * `let vim_markdown_preview_github=1`
-    * Note that this makes a request to [GitHub's API](https://developer.github.com/v3/markdown/) (causing latencies) and may require [authentication](https://github.com/joeyespo/grip#access).
-    * Requires a network connection
+Installation
+------------
 
-The following example is using the write buffer option on OS X, with displaying images in the markdown preview, adding the following to `.vimrc`:
+* With [Pathogen](https://github.com/tpope/vim-pathogen): Place `vim-markdown-preview/` in `.vim/bundle/`.
+* With [Vundle](https://github.com/VundleVim/Vundle.vim):
+    * Add `Plugin 'JamshedVesuna/vim-markdown-preview'` to your `.vimrc`.
+    * Launch `vim` and run `:PluginInstall`
 
-```vim
-let vim_markdown_preview_temp_file=1
-let vim_markdown_preview_toggle=2
-```
+See more [Options](#options).
 
-![Screenshot](images/screenshot-with-images.gif?raw=true "Screenshot With Images")
+Usage
+-----
 
-Support and Requirements
-========================
+By default, when in a `.markdown` or `.md` file, and  `Ctrl-p` is pressed, this plugin will either open a preview in your browser, or refresh your current preview (can be remapped, see [Options](#options)).
 
-## OS X:
+Your cursor will remain in Vim.
 
-* [Markdown](http://daringfireball.net/projects/markdown/) or [grip](https://github.com/joeyespo/grip) (for GitHub flavored markdown)
+Requirements
+------------
+
+### Mac OS X:
+
+* [Markdown](http://daringfireball.net/projects/markdown/) or [grip](https://github.com/joeyespo/grip) (for [GitHub flavoured markdown](#github))
 * [Safari](https://www.apple.com/safari/)
 
-## Unix:
+### Unix:
 
-* [Markdown](http://daringfireball.net/projects/markdown/) or [grip](https://github.com/joeyespo/grip) (for GitHub flavored markdown)
+* [Markdown](http://daringfireball.net/projects/markdown/) or [grip](https://github.com/joeyespo/grip) (for [GitHub flavoured markdown](#github))
 * [xdotool](https://github.com/jordansissel/xdotool)
 * [Google Chrome](https://www.google.com/chrome/browser/) or [other browser](https://github.com/JamshedVesuna/vim-markdown-preview/wiki/Use-other-browser-to-preview-markdown#ubuntu-or-debian)
 
-Usage
-=====
-When in a *.markdown or *.md file, vim-markdown-preview does the following when you type `Ctrl-p` (can be remapped, see [Installation](#installation)):
+Options
+-------
+All options have default values and work out of the box. If you prefer to change these, just add the following lines to your [.vimrc](http://vim.wikia.com/wiki/Open_vimrc_file) file.
+Note that after changing an option, you have to restart Vim for the change to take effect.
 
-* If you are not previewing the current file:
-    * Open an html rendered version of your file in Google Chrome or Safari in the background.
-* Otherwise:
-    * Refresh your preview of the current markdown file in Google Chrome or Safari.
+<a name='toggle'></a>
+### The `vim_markdown_preview_toggle` option
 
+This option does two things (to be fixed by #17):
+
+1. Display images in the preview
+2. Generate preview on buffer write (Example: on `:w`)
+
+There are a total of four values (`0`, `1`, `2`, `3`) this option can take.
+
+Default: `0`, which maps Control p (*not* a buffer write) to generating the preview and does *not* display images.
+
+Example: To display images with the [hotkey](#hotkey) mapping (defaults to Control p).
+```vim
+let vim_markdown_preview_toggle=1
+```
+
+Example: To display images automatically on buffer write.
+```vim
+let vim_markdown_preview_toggle=2
+```
+
+Example: To disregard images and still automatically preview on buffer write.
+```vim
+let vim_markdown_preview_toggle=3
+```
+
+<a name='hotkey'></a>
+### The `vim_markdown_preview_hotkey` option
+
+By default, this plugin maps `<C-p>` (Control p) to activate the preview. To remap Control p to a different hotkey, change the binding. Don't forget to add the single quotation marks.
+
+Default: `'<C-p>'`
+
+Example: Mapping Control M.
+```vim
+let vim_markdown_preview_hotkey='<C-m>'
+```
+
+<a name='browser'></a>
+### The `vim_markdown_preview_browser` option
+
+By default, if you are using Unix, [Google Chrome](www.google.com/chrome/) is the default browser. If you are on Mac OS X, [Safari](www.apple.com/safari/) is the default.
+Note that bug #16 does not allow cross operating system and browser support. See the [wiki page](https://github.com/JamshedVesuna/vim-markdown-preview/wiki/Use-other-browser-to-preview-markdown) for more help.
+
+Default: `'Google Chrome'`
+
+Example: Using Google Chrome.
+```vim
+let vim_markdown_preview_browser='Google Chrome'
+```
+
+<a name='temp'></a>
+### The `vim_markdown_preview_temp_file` option
+
+By default, this plugin keeps the rendered `.html` file. If you would automatically like to remove the html file after opening it in a browser, set this option to `1`. Note that removing the rendered html file with a slow browser may err.
+
+Default: `0`
+
+Example: Remove the rendered preview.
+```vim
+let vim_markdown_preview_temp_file=1
+```
+
+<a name='github'></a>
+### The `vim_markdown_preview_github` option
+
+If you prefer [GitHub flavoured markdown](https://help.github.com/articles/github-flavored-markdown/) you need to install [Python grip](https://github.com/joeyespo/grip). Note that this makes a request to [GitHub's API](https://developer.github.com/v3/markdown/) (causing latencies) and may require [authentication](https://github.com/joeyespo/grip#access). This option also requires a network connection.
+
+Default: `0`
+
+Example: Use GitHub flavoured markdown.
+```vim
+let vim_markdown_preview_github=1
+```
 
 Behind The Scenes
-=================
-* Regular mapping:
-    1. First, vim-markdown-preview renders your markdown as html and creates a temporary file `vim-markdown-preview.html` in `/tmp/`.
-    2. Next, vim-markdown-preview either opens the html file or refreshes the Google Chrome or Safari tab.
-    3. If you would like vim-markdown-preview to remove the temporary file so nothing left behind, set `REMOVE_TEMP_FILE` to 1.
-* Image viewing:
-    1. First, vim-markdown-preview renders your markdown as html with the filename `<your-file>.md.html` in the same directory.
-    2. Next, vim-markdown-preview either opens the html file or refreshes the Google Chrome or Safari tab.
-    3. There is currently no option to remove this file after previewing.
+-----------------
+
+1. First, this plugin renders your markdown as html and creates a temporary html file.
+    * If image rendering is on, the html file will be in your [working directory](https://en.wikipedia.org/wiki/Working_directory).
+    * Otherwise, it will be in `/tmp/`.
+2. Next, this plugin either opens the html file or refreshes the Google Chrome or Safari tab.
+    * If you are using GitHub flavoured markdown, `grip` will make a call to the GitHub API and retrieve the html.
+3. Lastly, if you choose, this plugin will remove the temporary file.
+
+![Screenshot](images/screenshot-with-images.gif?raw=true "Render Images and preview on buffer write using Mac OS X")
