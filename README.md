@@ -62,7 +62,7 @@ Note that after changing an option, you have to restart Vim for the change to ta
 <a name='toggle'></a>
 ### The `vim_markdown_preview_toggle` option
 
-This option does two things (to be fixed by #17):
+This option does two things (to be fixed by [#17](https://github.com/JamshedVesuna/vim-markdown-preview/issues/17)):
 
 1. Display images in the preview
 2. Generate preview on buffer write (Example: on `:w`)
@@ -102,7 +102,7 @@ let vim_markdown_preview_hotkey='<C-m>'
 ### The `vim_markdown_preview_browser` option
 
 By default, if you are using Unix, [Google Chrome](www.google.com/chrome/) is the default browser. If you are on Mac OS X, [Safari](www.apple.com/safari/) is the default.
-Note that bug #16 does not allow cross operating system and browser support. See the [wiki page](https://github.com/JamshedVesuna/vim-markdown-preview/wiki/Use-other-browser-to-preview-markdown) for more help.
+Note that bug [#16](https://github.com/JamshedVesuna/vim-markdown-preview/issues/16) does not allow cross operating system and browser support. See the [wiki page](https://github.com/JamshedVesuna/vim-markdown-preview/wiki/Use-other-browser-to-preview-markdown) for more help.
 
 Default: `'Google Chrome'`
 
