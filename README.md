@@ -101,7 +101,7 @@ let vim_markdown_preview_hotkey='<C-m>'
 <a name='browser'></a>
 ### The `vim_markdown_preview_browser` option
 
-By default, if you are using Unix, [Google Chrome](www.google.com/chrome/) is the default browser. If you are on Mac OS X, [Safari](www.apple.com/safari/) is the default.
+By default, if you are using Unix, [Google Chrome](https://www.google.com/chrome/) is the default browser. If you are on Mac OS X, [Safari](https://www.apple.com/safari/) is the default.
 Note that bug [#16](https://github.com/JamshedVesuna/vim-markdown-preview/issues/16) does not allow cross operating system and browser support. See the [wiki page](https://github.com/JamshedVesuna/vim-markdown-preview/wiki/Use-other-browser-to-preview-markdown) for more help.
 
 Default: `'Google Chrome'`
@@ -139,10 +139,10 @@ Behind The Scenes
 -----------------
 
 1. First, this plugin renders your markdown as html and creates a temporary html file.
-    * If image rendering is on, the html file will be in your [working directory](https://en.wikipedia.org/wiki/Working_directory).
+    * If [image rendering](#toggle) is on, the html file will be in your [working directory](https://en.wikipedia.org/wiki/Working_directory).
     * Otherwise, it will be in `/tmp/`.
 2. Next, this plugin either opens the html file or refreshes the Google Chrome or Safari tab.
     * If you are using GitHub flavoured markdown, `grip` will make a call to the GitHub API and retrieve the html.
 3. Lastly, if you choose, this plugin will remove the temporary file.
 
-![Screenshot](images/screenshot-with-images.gif?raw=true "Render Images and preview on buffer write using Mac OS X")
+![Screenshot](images/screenshot-with-images.gif?raw=true "Render images and preview on buffer write using Mac OS X")
