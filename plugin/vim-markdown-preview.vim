@@ -3,10 +3,21 @@
 "   git@github.com:JamshedVesuna/vim-markdown-preview.git
 "============================================================
 
-let b:vim_markdown_preview_browser = get(g:, 'vim_markdown_preview_browser', 'Google Chrome')
-let b:vim_markdown_preview_temp_file = get(g:, 'vim_markdown_preview_temp_file', 0)
-let b:vim_markdown_preview_toggle = get(g:, 'vim_markdown_preview_toggle', 0)
-let b:vim_markdown_preview_github = get(g:, 'vim_markdown_preview_github', 0)
+if !exists("g:vim_markdown_preview_browser")
+  let g:vim_markdown_preview_browser = 'Google Chrome'
+endif
+
+if !exists("g:vim_markdown_preview_temp_file")
+  let g:vim_markdown_preview_temp_file = 0
+endif
+
+if !exists("g:vim_markdown_preview_toggle")
+  let g:vim_markdown_preview_toggle = 0
+endif
+
+if !exists("g:vim_markdown_preview_github")
+  let g:vim_markdown_preview_github = 0
+endif
 
 if !exists("g:vim_markdown_preview_hotkey")
     let g:vim_markdown_preview_hotkey='<C-p>'
@@ -29,14 +40,14 @@ function! Vim_Markdown_Preview()
 
   let curr_file = expand('%:p')
 
-  if b:vim_markdown_preview_github == 1
+  if g:vim_markdown_preview_github == 1
     call system('grip "' . curr_file . '" --export /tmp/vim-markdown-preview.html')
   else
     call system('markdown "' . curr_file . '" > /tmp/vim-markdown-preview.html')
   endif
 
   if OSNAME == 'unix'
-    let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - " . b:vim_markdown_preview_browser . "'")
+    let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - " . g:vim_markdown_preview_browser . "'")
     if !chrome_wid
       call system('see /tmp/vim-markdown-preview.html &> /dev/null &')
     else
@@ -52,7 +63,7 @@ function! Vim_Markdown_Preview()
     call system('open -g /tmp/vim-markdown-preview.html')
   endif
 
-  if b:vim_markdown_preview_temp_file == 1
+  if g:vim_markdown_preview_temp_file == 1
     sleep 200m
     call system('rm /tmp/vim-markdown-preview.html')
   endif
@@ -77,7 +88,7 @@ function! Vim_Markdown_Preview_Local()
 
   let curr_file = expand('%:p')
 
-  if b:vim_markdown_preview_github == 1
+  if g:vim_markdown_preview_github == 1
     call system('grip "' . curr_file . '" --export ' . curr_file . '.html')
   else
     call system('markdown "' . curr_file . '" > ' . curr_file . '.html')
@@ -85,7 +96,7 @@ function! Vim_Markdown_Preview_Local()
   endif
 
   if OSNAME == 'unix'
-    let chrome_wid = system("xdotool search --name '". curr_file . ".html - " . b:vim_markdown_preview_browser . "'")
+    let chrome_wid = system("xdotool search --name '". curr_file . ".html - " . g:vim_markdown_preview_browser . "'")
     if !chrome_wid
       call system('see ' . curr_file . '.html &> /dev/null &')
     else
@@ -101,23 +112,23 @@ function! Vim_Markdown_Preview_Local()
     call system('open -g ' . curr_file . '.html')
   endif
 
-  if b:vim_markdown_preview_temp_file == 1
+  if g:vim_markdown_preview_temp_file == 1
     sleep 200m
     call system('rm ' . curr_file . '.html')
   endif
 endfunction
 
-if b:vim_markdown_preview_toggle == 0
+if g:vim_markdown_preview_toggle == 0
   "Maps vim_markdown_preview_hotkey to Vim_Markdown_Preview()
   :exec 'autocmd Filetype markdown,md map <buffer> ' . g:vim_markdown_preview_hotkey . ' :call Vim_Markdown_Preview()<CR>'
-elseif b:vim_markdown_preview_toggle == 1
+elseif g:vim_markdown_preview_toggle == 1
   "Display images - Maps vim_markdown_preview_hotkey to Vim_Markdown_Preview_Local() - saves the html file locally
   "and displays images in path
   :exec 'autocmd Filetype markdown,md map <buffer> ' . g:vim_markdown_preview_hotkey . ' :call Vim_Markdown_Preview_Local()<CR>'
-elseif b:vim_markdown_preview_toggle == 2
+elseif g:vim_markdown_preview_toggle == 2
   "Display images - Automatically call Vim_Markdown_Preview_Local() on buffer write
   autocmd BufWritePost *.markdown,*.md :call Vim_Markdown_Preview_Local()
-elseif b:vim_markdown_preview_toggle == 3
+elseif g:vim_markdown_preview_toggle == 3
   "Automatically call Vim_Markdown_Preview() on buffer write
   autocmd BufWritePost *.markdown,*.md :call Vim_Markdown_Preview()
 endif
