@@ -46,11 +46,13 @@ Requirements
 ### Mac OS X:
 
 * [Markdown](http://daringfireball.net/projects/markdown/) or [grip](https://github.com/joeyespo/grip) (for [GitHub flavoured markdown](#github))
+    * If using Grip, put `let vim_markdown_preview_github=1` in your `.vimrc` file
 * [Safari](https://www.apple.com/safari/)
 
 ### Unix:
 
 * [Markdown](http://daringfireball.net/projects/markdown/) or [grip](https://github.com/joeyespo/grip) (for [GitHub flavoured markdown](#github))
+    * If using Grip, put `let vim_markdown_preview_github=1` in your `.vimrc` file
 * [xdotool](https://github.com/jordansissel/xdotool)
 * [Google Chrome](https://www.google.com/chrome/browser/) or [other browser](https://github.com/JamshedVesuna/vim-markdown-preview/wiki/Use-other-browser-to-preview-markdown#ubuntu-or-debian)
 
