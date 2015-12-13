@@ -19,6 +19,10 @@ if !exists("g:vim_markdown_preview_github")
   let g:vim_markdown_preview_github = 0
 endif
 
+if !exists("g:vim_markdown_preview_use_xdg_open")
+    let g:vim_markdown_preview_use_xdg_open = 0
+endif
+
 if !exists("g:vim_markdown_preview_hotkey")
     let g:vim_markdown_preview_hotkey='<C-p>'
 endif
@@ -49,7 +53,11 @@ function! Vim_Markdown_Preview()
   if OSNAME == 'unix'
     let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - " . g:vim_markdown_preview_browser . "'")
     if !chrome_wid
-      call system('see /tmp/vim-markdown-preview.html &> /dev/null &')
+      if g:vim_markdown_preview_use_xdg_open == 1
+        call system('xdg-open /tmp/vim-markdown-preview.html &> /dev/null &')
+      else
+        call system('see /tmp/vim-markdown-preview.html &> /dev/null &')
+      endif
     else
       let curr_wid = system('xdotool getwindowfocus')
       call system('xdotool windowmap ' . chrome_wid)
@@ -98,7 +106,11 @@ function! Vim_Markdown_Preview_Local()
   if OSNAME == 'unix'
     let chrome_wid = system("xdotool search --name '". curr_file . ".html - " . g:vim_markdown_preview_browser . "'")
     if !chrome_wid
-      call system('see ' . curr_file . '.html &> /dev/null &')
+      if g:vim_markdown_preview_use_xdg_open == 1
+        call system('xdg-open /tmp/vim-markdown-preview.html &> /dev/null &')
+      else
+        call system('see /tmp/vim-markdown-preview.html &> /dev/null &')
+      endif
     else
       let curr_wid = system('xdotool getwindowfocus')
       call system('xdotool windowmap ' . chrome_wid)

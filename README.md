@@ -13,6 +13,7 @@ Vim Markdown Preview
     - [Browser](#browser)
     - [Temp File](#temp)
     - [Github Flavoured Markdown](#github)
+    - [Use xdg-open](#xdg)
 - [Behind the Scenes](#behind-the-scenes)
 
 Intro
@@ -135,6 +136,18 @@ Default: `0`
 Example: Use GitHub flavoured markdown.
 ```vim
 let vim_markdown_preview_github=1
+```
+
+<a name='xdg'></a>
+### The `vim_markdown_preview_use_xdg_open` option
+
+If your system does not come with `see`, and you would like to use `xdg-open` to view your rendered html in the browser, set the following flag:
+
+Default: `0`
+
+Example: Use `xdg-open`.
+```vim
+let vim_markdown_preview_use_xdg_open=1
 ```
 
 Behind The Scenes
