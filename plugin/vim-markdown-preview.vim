@@ -97,10 +97,9 @@ function! Vim_Markdown_Preview_Local()
   let curr_file = expand('%:p')
 
   if g:vim_markdown_preview_github == 1
-    call system('grip "' . curr_file . '" --export ' . curr_file . '.html')
+    call system('grip "' . curr_file . '" --export "' . curr_file . '".html')
   else
-    call system('markdown "' . curr_file . '" > ' . curr_file . '.html')
-
+    call system('markdown "' . curr_file . '" > "' . curr_file . '".html')
   endif
 
   if OSNAME == 'unix'
@@ -121,12 +120,12 @@ function! Vim_Markdown_Preview_Local()
   endif
 
   if OSNAME == 'mac'
-    call system('open -g ' . curr_file . '.html')
+    call system('open -g "' . curr_file . '".html')
   endif
 
   if g:vim_markdown_preview_temp_file == 1
     sleep 200m
-    call system('rm ' . curr_file . '.html')
+    call system('rm "' . curr_file . '".html')
   endif
 endfunction
 
