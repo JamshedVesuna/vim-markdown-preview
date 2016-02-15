@@ -17,7 +17,11 @@ let s:OSNAME = 'mac'
 endif
 
 if !exists("g:vim_markdown_preview_browser")
-  let g:vim_markdown_preview_browser = 'Google Chrome'
+  if s:OSNAME == 'mac'
+    let g:vim_markdown_preview_browser = 'Safari'
+  else
+    let g:vim_markdown_preview_browser = 'Google Chrome'
+  endif
 endif
 
 if !exists("g:vim_markdown_preview_temp_file")
