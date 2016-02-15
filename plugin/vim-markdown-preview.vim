@@ -68,7 +68,7 @@ function! Vim_Markdown_Preview()
   endif
 
   if OSNAME == 'mac'
-    call system('open -g /tmp/vim-markdown-preview.html')
+    call system('open -a "' . g:vim_markdown_preview_browser . '" -g /tmp/vim-markdown-preview.html')
   endif
 
   if g:vim_markdown_preview_temp_file == 1
@@ -120,7 +120,7 @@ function! Vim_Markdown_Preview_Local()
   endif
 
   if OSNAME == 'mac'
-    call system('open -g "' . curr_file . '".html')
+    call system('open -a "' . g:vim_markdown_preview_browser . '" -g "' . curr_file . '".html')
   endif
 
   if g:vim_markdown_preview_temp_file == 1
