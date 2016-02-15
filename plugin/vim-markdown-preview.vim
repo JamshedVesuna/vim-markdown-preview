@@ -3,6 +3,19 @@
 "   git@github.com:JamshedVesuna/vim-markdown-preview.git
 "============================================================
 
+let s:OSNAME = 'Unidentified'
+
+if has('win32')
+" Not yet used
+let s:OSNAME = 'win32'
+endif
+if has('unix')
+let s:OSNAME = 'unix'
+endif
+if has('mac')
+let s:OSNAME = 'mac'
+endif
+
 if !exists("g:vim_markdown_preview_browser")
   let g:vim_markdown_preview_browser = 'Google Chrome'
 endif
@@ -29,19 +42,6 @@ endif
 
 function! Vim_Markdown_Preview()
 
-  let OSNAME = 'Unidentified'
-
-  if has('win32')
-    " Not yet used
-    let OSNAME = 'win32'
-  endif
-  if has('unix')
-    let OSNAME = 'unix'
-  endif
-  if has('mac')
-    let OSNAME = 'mac'
-  endif
-
   let curr_file = expand('%:p')
 
   if g:vim_markdown_preview_github == 1
@@ -50,7 +50,7 @@ function! Vim_Markdown_Preview()
     call system('markdown "' . curr_file . '" > /tmp/vim-markdown-preview.html')
   endif
 
-  if OSNAME == 'unix'
+  if s:OSNAME == 'unix'
     let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - " . g:vim_markdown_preview_browser . "'")
     if !chrome_wid
       if g:vim_markdown_preview_use_xdg_open == 1
@@ -67,7 +67,7 @@ function! Vim_Markdown_Preview()
     endif
   endif
 
-  if OSNAME == 'mac'
+  if s:OSNAME == 'mac'
     call system('open -a "' . g:vim_markdown_preview_browser . '" -g /tmp/vim-markdown-preview.html')
   endif
 
@@ -81,19 +81,6 @@ endfunction
 "Renders html locally and displays images
 function! Vim_Markdown_Preview_Local()
 
-  let OSNAME = 'Unidentified'
-
-  if has('win32')
-    " Not yet used
-    let OSNAME = 'win32'
-  endif
-  if has('unix')
-    let OSNAME = 'unix'
-  endif
-  if has('mac')
-    let OSNAME = 'mac'
-  endif
-
   let curr_file = expand('%:p')
 
   if g:vim_markdown_preview_github == 1
@@ -102,7 +89,7 @@ function! Vim_Markdown_Preview_Local()
     call system('markdown "' . curr_file . '" > "' . curr_file . '".html')
   endif
 
-  if OSNAME == 'unix'
+  if s:OSNAME == 'unix'
     let chrome_wid = system("xdotool search --name '". curr_file . ".html - " . g:vim_markdown_preview_browser . "'")
     if !chrome_wid
       if g:vim_markdown_preview_use_xdg_open == 1
@@ -119,7 +106,7 @@ function! Vim_Markdown_Preview_Local()
     endif
   endif
 
-  if OSNAME == 'mac'
+  if s:OSNAME == 'mac'
     call system('open -a "' . g:vim_markdown_preview_browser . '" -g "' . curr_file . '".html')
   endif
 
