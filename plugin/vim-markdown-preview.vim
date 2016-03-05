@@ -29,32 +29,34 @@ if !exists("g:vim_markdown_preview_hotkey")
     let g:vim_markdown_preview_hotkey='<C-p>'
 endif
 
+
+let b:vmp_osname = 'Unidentified'
+
+if has('win32')
+  " Not yet used
+  let b:vmp_osname = 'win32'
+endif
+if has('unix')
+  let b:vmp_osname = 'unix'
+endif
+if has('mac')
+  let b:vmp_osname = 'mac'
+  let b:search_script = b:vmp_script_path . '/applescript/search-for-vmp.scpt'
+  let b:activate_script = b:vmp_script_path . '/applescript/activate-vmp.scpt'
+endif
+
+let b:curr_file = expand('%:p')
+
+
 function! Vim_Markdown_Preview()
 
-  let OSNAME = 'Unidentified'
-
-  if has('win32')
-    " Not yet used
-    let OSNAME = 'win32'
-  endif
-  if has('unix')
-    let OSNAME = 'unix'
-  endif
-  if has('mac')
-    let OSNAME = 'mac'
-    let b:search_script = b:vmp_script_path . '/applescript/search-for-vmp.scpt'
-    let b:activate_script = b:vmp_script_path . '/applescript/activate-vmp.scpt'
-  endif
-
-  let curr_file = expand('%:p')
-
   if g:vim_markdown_preview_github == 1
-    call system('grip "' . curr_file . '" --export /tmp/vim-markdown-preview.html --title vim-markdown-preview.html')
+    call system('grip "' . b:curr_file . '" --export /tmp/vim-markdown-preview.html --title vim-markdown-preview.html')
   else
-    call system('markdown "' . curr_file . '" > /tmp/vim-markdown-preview.html')
+    call system('markdown "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
   endif
 
-  if OSNAME == 'unix'
+  if b:vmp_osname == 'unix'
     let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - " . g:vim_markdown_preview_browser . "'")
     if !chrome_wid
       if g:vim_markdown_preview_use_xdg_open == 1
@@ -71,7 +73,7 @@ function! Vim_Markdown_Preview()
     endif
   endif
 
-  if OSNAME == 'mac'
+  if b:vmp_osname == 'mac'
     let b:vmp_preview_in_browser = system('osascript ' . b:search_script)
     if b:vmp_preview_in_browser == 1
       call system('open -g /tmp/vim-markdown-preview.html')
@@ -90,36 +92,19 @@ endfunction
 "Renders html locally and displays images
 function! Vim_Markdown_Preview_Local()
 
-  let OSNAME = 'Unidentified'
-
-  if has('win32')
-    " Not yet used
-    let OSNAME = 'win32'
-  endif
-  if has('unix')
-    let OSNAME = 'unix'
-  endif
-  if has('mac')
-    let OSNAME = 'mac'
-    let b:search_script = b:vmp_script_path . '/applescript/search-for-vmp.scpt'
-    let b:activate_script = b:vmp_script_path . '/applescript/activate-vmp.scpt'
-  endif
-
-  let curr_file = expand('%:p')
-
   if g:vim_markdown_preview_github == 1
-    call system('grip "' . curr_file . '" --export vim-markdown-preview.html --title vim-markdown-preview.html')
+    call system('grip "' . b:curr_file . '" --export vim-markdown-preview.html --title vim-markdown-preview.html')
   else
-    call system('markdown "' . curr_file . '" > vim-markdown-preview.html')
+    call system('markdown "' . b:curr_file . '" > vim-markdown-preview.html')
   endif
 
-  if OSNAME == 'unix'
+  if b:vmp_osname == 'unix'
     let chrome_wid = system("xdotool search --name vim-markdown-preview.html - " . g:vim_markdown_preview_browser . "'")
     if !chrome_wid
       if g:vim_markdown_preview_use_xdg_open == 1
-        call system('xdg-open /tmp/vim-markdown-preview.html &> /dev/null &')
+        call system('xdg-open vim-markdown-preview.html &> /dev/null &')
       else
-        call system('see /tmp/vim-markdown-preview.html &> /dev/null &')
+        call system('see vim-markdown-preview.html &> /dev/null &')
       endif
     else
       let curr_wid = system('xdotool getwindowfocus')
@@ -130,10 +115,10 @@ function! Vim_Markdown_Preview_Local()
     endif
   endif
 
-  if OSNAME == 'mac'
+  if b:vmp_osname == 'mac'
     let b:vmp_preview_in_browser = system('osascript ' . b:search_script)
     if b:vmp_preview_in_browser == 1
-      call system('open -g /tmp/vim-markdown-preview.html')
+      call system('open -g vim-markdown-preview.html')
     else
       call system('osascript ' . b:activate_script)
     endif
