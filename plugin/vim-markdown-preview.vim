@@ -3,6 +3,8 @@
 "   git@github.com:JamshedVesuna/vim-markdown-preview.git
 "============================================================
 
+let b:vmp_script_path = resolve(expand('<sfile>:p:h'))
+
 if !exists("g:vim_markdown_preview_browser")
   let g:vim_markdown_preview_browser = 'Google Chrome'
 endif
@@ -40,6 +42,8 @@ function! Vim_Markdown_Preview()
   endif
   if has('mac')
     let OSNAME = 'mac'
+    let b:search_script = b:vmp_script_path . '/applescript/search-for-vmp.scpt'
+    let b:activate_script = b:vmp_script_path . '/applescript/activate-vmp.scpt'
   endif
 
   let curr_file = expand('%:p')
@@ -68,7 +72,12 @@ function! Vim_Markdown_Preview()
   endif
 
   if OSNAME == 'mac'
-    call system('open -g /tmp/vim-markdown-preview.html')
+    let b:vmp_preview_in_browser = system('osascript ' . b:search_script)
+    if b:vmp_preview_in_browser == 1
+      call system('open -g /tmp/vim-markdown-preview.html')
+    else
+      call system('osascript ' . b:activate_script)
+    endif
   endif
 
   if g:vim_markdown_preview_temp_file == 1
@@ -92,6 +101,8 @@ function! Vim_Markdown_Preview_Local()
   endif
   if has('mac')
     let OSNAME = 'mac'
+    let b:search_script = b:vmp_script_path . '/applescript/search-for-vmp.scpt'
+    let b:activate_script = b:vmp_script_path . '/applescript/activate-vmp.scpt'
   endif
 
   let curr_file = expand('%:p')
@@ -120,7 +131,12 @@ function! Vim_Markdown_Preview_Local()
   endif
 
   if OSNAME == 'mac'
-    call system('open -g vim-markdown-preview.html')
+    let b:vmp_preview_in_browser = system('osascript ' . b:search_script)
+    if b:vmp_preview_in_browser == 1
+      call system('open -g /tmp/vim-markdown-preview.html')
+    else
+      call system('osascript ' . b:activate_script)
+    endif
   endif
 
   if g:vim_markdown_preview_temp_file == 1
