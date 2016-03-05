@@ -45,7 +45,7 @@ function! Vim_Markdown_Preview()
   let curr_file = expand('%:p')
 
   if g:vim_markdown_preview_github == 1
-    call system('grip "' . curr_file . '" --export /tmp/vim-markdown-preview.html')
+    call system('grip "' . curr_file . '" --export /tmp/vim-markdown-preview.html --title vim-markdown-preview.html')
   else
     call system('markdown "' . curr_file . '" > /tmp/vim-markdown-preview.html')
   endif
@@ -97,13 +97,13 @@ function! Vim_Markdown_Preview_Local()
   let curr_file = expand('%:p')
 
   if g:vim_markdown_preview_github == 1
-    call system('grip "' . curr_file . '" --export "' . curr_file . '".html')
+    call system('grip "' . curr_file . '" --export vim-markdown-preview.html --title vim-markdown-preview.html')
   else
-    call system('markdown "' . curr_file . '" > "' . curr_file . '".html')
+    call system('markdown "' . curr_file . '" > vim-markdown-preview.html')
   endif
 
   if OSNAME == 'unix'
-    let chrome_wid = system("xdotool search --name '". curr_file . ".html - " . g:vim_markdown_preview_browser . "'")
+    let chrome_wid = system("xdotool search --name vim-markdown-preview.html - " . g:vim_markdown_preview_browser . "'")
     if !chrome_wid
       if g:vim_markdown_preview_use_xdg_open == 1
         call system('xdg-open /tmp/vim-markdown-preview.html &> /dev/null &')
@@ -120,12 +120,12 @@ function! Vim_Markdown_Preview_Local()
   endif
 
   if OSNAME == 'mac'
-    call system('open -g "' . curr_file . '".html')
+    call system('open -g vim-markdown-preview.html')
   endif
 
   if g:vim_markdown_preview_temp_file == 1
     sleep 200m
-    call system('rm "' . curr_file . '".html')
+    call system('rm vim-markdown-preview.html')
   endif
 endfunction
 
