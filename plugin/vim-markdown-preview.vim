@@ -74,11 +74,15 @@ function! Vim_Markdown_Preview()
   endif
 
   if g:vmp_osname == 'mac'
-    let b:vmp_preview_in_browser = system('osascript ' . g:vmp_search_script)
-    if b:vmp_preview_in_browser == 1
-      call system('open -g /tmp/vim-markdown-preview.html')
+    if g:vim_markdown_preview_browser == "Google Chrome"
+      let b:vmp_preview_in_browser = system('osascript ' . g:vmp_search_script)
+      if b:vmp_preview_in_browser == 1
+        call system('open -g /tmp/vim-markdown-preview.html')
+      else
+        call system('osascript ' . g:vmp_activate_script)
+      endif
     else
-      call system('osascript ' . g:vmp_activate_script)
+      call system('open -g /tmp/vim-markdown-preview.html')
     endif
   endif
 
@@ -117,11 +121,15 @@ function! Vim_Markdown_Preview_Local()
   endif
 
   if g:vmp_osname == 'mac'
-    let b:vmp_preview_in_browser = system('osascript ' . g:vmp_search_script)
-    if b:vmp_preview_in_browser == 1
-      call system('open -g vim-markdown-preview.html')
+    if g:vim_markdown_preview_browser == "Google Chrome"
+      let b:vmp_preview_in_browser = system('osascript ' . g:vmp_search_script)
+      if b:vmp_preview_in_browser == 1
+        call system('open -g vim-markdown-preview.html')
+      else
+        call system('osascript ' . g:vmp_activate_script)
+      endif
     else
-      call system('osascript ' . g:vmp_activate_script)
+      call system('open -g vim-markdown-preview.html')
     endif
   endif
 
