@@ -5,7 +5,7 @@ Vim Markdown Preview
 - [Installation](#installation)
 - [Usage](#usage)
 - [Requirements](#requirements)
-    - [Max OS X](#mac-os-x)
+    - [Mac OS X](#mac-os-x)
     - [Unix](#unix)
 - [Options](#options)
     - [Image rendering & save on buffer write](#toggle)
