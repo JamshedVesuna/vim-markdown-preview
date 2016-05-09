@@ -32,17 +32,19 @@ endif
 
 let g:vmp_osname = 'Unidentified'
 
-if has('win32')
+if has('win32') || has('win64')
   " Not yet used
   let g:vmp_osname = 'win32'
-endif
-if has('unix')
-  let g:vmp_osname = 'unix'
-endif
-if has('mac')
-  let g:vmp_osname = 'mac'
-  let g:vmp_search_script = g:vmp_script_path . '/applescript/search-for-vmp.scpt'
-  let g:vmp_activate_script = g:vmp_script_path . '/applescript/activate-vmp.scpt'
+elseif has('unix')
+  let s:uname = system("uname")
+
+  if has('mac') || has('macunix') || has("gui_macvim") || s:uname == "Darwin\n"
+    let g:vmp_osname = 'mac'
+    let g:vmp_search_script = g:vmp_script_path . '/applescript/search-for-vmp.scpt'
+    let g:vmp_activate_script = g:vmp_script_path . '/applescript/activate-vmp.scpt'
+  else
+    let g:vmp_osname = 'unix'
+  endif
 endif
 
 
