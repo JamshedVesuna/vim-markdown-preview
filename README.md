@@ -5,7 +5,7 @@ Vim Markdown Preview
 - [Installation](#installation)
 - [Usage](#usage)
 - [Requirements](#requirements)
-    - [Max OS X](#mac-os-x)
+    - [Mac OS X](#mac-os-x)
     - [Unix](#unix)
 - [Options](#options)
     - [Image rendering & save on buffer write](#toggle)
@@ -22,7 +22,7 @@ A small Vim plugin for previewing markdown files in a browser.
 
 The aim of this plugin is to be light weight with minimal dependencies. Thus, there is *no* polling engine or webserver involved.
 
-![Screenshot](images/screenshot.gif?raw=true "Preview on buffer write using Unix")
+![Screenshot](http://i.imgur.com/1hvnXwA.gif?raw=true "Preview on buffer write using Unix")
 
 Installation
 ------------
@@ -159,5 +159,3 @@ Behind The Scenes
 2. Next, this plugin either opens the html file or refreshes the Google Chrome or Safari tab.
     * If you are using GitHub flavoured markdown, `grip` will make a call to the GitHub API and retrieve the html.
 3. Lastly, if you choose, this plugin will remove the temporary file.
-
-![Screenshot](images/screenshot-with-images.gif?raw=true "Render images and preview on buffer write using Mac OS X")
