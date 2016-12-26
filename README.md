@@ -13,6 +13,7 @@ Vim Markdown Preview
     - [Browser](#browser)
     - [Temp File](#temp)
     - [Github Flavoured Markdown](#github)
+    - [Markdown.pl](#perl)
     - [Use xdg-open](#xdg)
 - [Behind the Scenes](#behind-the-scenes)
 
@@ -138,6 +139,17 @@ Default: `0`
 Example: Use GitHub flavoured markdown.
 ```vim
 let vim_markdown_preview_github=1
+```
+
+<a name='perl'></a>
+### The `vim_markdown_preview_perl` option
+If you prefer to use John Gruber's [Markdown.pl](https://daringfireball.net/projects/markdown/) to render HTML, set the following flag:
+
+Default: `0`
+
+Example: Use Markdown.pl to render HTML.
+```vim
+let vim_markdown_preview_perl=1
 ```
 
 <a name='xdg'></a>
