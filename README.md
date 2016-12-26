@@ -57,6 +57,8 @@ Requirements
 * [xdotool](https://github.com/jordansissel/xdotool)
 * [Google Chrome](https://www.google.com/chrome/browser/) or [other browser](https://github.com/JamshedVesuna/vim-markdown-preview/wiki/Use-other-browser-to-preview-markdown#ubuntu-or-debian)
 
+It is recommended to use grip when rendering Unicode characters.
+
 Options
 -------
 All options have default values and work out of the box. If you prefer to change these, just add the following lines to your [.vimrc](http://vim.wikia.com/wiki/Open_vimrc_file) file.
