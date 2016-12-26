@@ -83,11 +83,11 @@ function! Vim_Markdown_Preview()
 
   if g:vmp_osname == 'mac'
     if g:vim_markdown_preview_browser == "Google Chrome"
-      let b:vmp_preview_in_browser = system('osascript ' . g:vmp_search_script)
+      let b:vmp_preview_in_browser = system('osascript "' . g:vmp_search_script . '"')
       if b:vmp_preview_in_browser == 1
         call system('open -g /tmp/vim-markdown-preview.html')
       else
-        call system('osascript ' . g:vmp_activate_script)
+        call system('osascript "' . g:vmp_activate_script . '"')
       endif
     else
       call system('open -g /tmp/vim-markdown-preview.html')
