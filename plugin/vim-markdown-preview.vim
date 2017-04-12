@@ -64,6 +64,9 @@ function! Vim_Markdown_Preview()
   else
     call system('markdown "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
   endif
+  if v:shell_error
+    echo 'Please install the necessary requirements: https://github.com/JamshedVesuna/vim-markdown-preview#requirements'
+  endif
 
   if g:vmp_osname == 'unix'
     let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - " . g:vim_markdown_preview_browser . "'")
@@ -112,6 +115,9 @@ function! Vim_Markdown_Preview_Local()
     call system('Markdown.pl "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
   else
     call system('markdown "' . b:curr_file . '" > vim-markdown-preview.html')
+  endif
+  if v:shell_error
+    echo 'Please install the necessary requirements: https://github.com/JamshedVesuna/vim-markdown-preview#requirements'
   endif
 
   if g:vmp_osname == 'unix'
