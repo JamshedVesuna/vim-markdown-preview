@@ -46,6 +46,10 @@ if !exists("g:vim_markdown_preview_perl")
   let g:vim_markdown_preview_perl = 0
 endif
 
+if !exists("g:vim_markdown_preview_pandoc")
+  let g:vim_markdown_preview_pandoc = 0
+endif
+
 if !exists("g:vim_markdown_preview_use_xdg_open")
     let g:vim_markdown_preview_use_xdg_open = 0
 endif
@@ -61,6 +65,8 @@ function! Vim_Markdown_Preview()
     call system('grip "' . b:curr_file . '" --export /tmp/vim-markdown-preview.html --title vim-markdown-preview.html')
   elseif g:vim_markdown_preview_perl == 1
     call system('Markdown.pl "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
+  elseif g:vim_markdown_preview_pandoc == 1
+    call system('pandoc --smart --standalone "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
   else
     call system('markdown "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
   endif
@@ -113,6 +119,8 @@ function! Vim_Markdown_Preview_Local()
     call system('grip "' . b:curr_file . '" --export vim-markdown-preview.html --title vim-markdown-preview.html')
   elseif g:vim_markdown_preview_perl == 1
     call system('Markdown.pl "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
+  elseif g:vim_markdown_preview_pandoc == 1
+    call system('pandoc --smart --standalone "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
   else
     call system('markdown "' . b:curr_file . '" > vim-markdown-preview.html')
   endif
