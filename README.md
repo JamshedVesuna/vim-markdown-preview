@@ -14,6 +14,7 @@ Vim Markdown Preview
     - [Temp File](#temp)
     - [Github Flavoured Markdown](#github)
     - [Markdown.pl](#perl)
+    - [Pandoc](#pandoc)
     - [Use xdg-open](#xdg)
 - [Behind the Scenes](#behind-the-scenes)
 
@@ -150,6 +151,17 @@ Default: `0`
 Example: Use Markdown.pl to render HTML.
 ```vim
 let vim_markdown_preview_perl=1
+```
+
+<a name='pandoc'></a>
+### The `vim_markdown_preview_pandoc` option
+If you prefer to use John MacFarlane's [Pandoc](http://pandoc.org/) to render HTML, set the following flag:
+
+Default: `0`
+
+Example: Use Pandoc to render HTML.
+```vim
+let vim_markdown_preview_pandoc=1
 ```
 
 <a name='xdg'></a>
