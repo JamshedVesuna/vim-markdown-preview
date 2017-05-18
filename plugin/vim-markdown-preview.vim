@@ -68,7 +68,7 @@ function! Vim_Markdown_Preview()
   elseif g:vim_markdown_preview_pandoc == 1
     call system('pandoc --smart --standalone "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
   else
-    call system('markdown "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
+    call system('Markdown.pl "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
   endif
   if v:shell_error
     echo 'Please install the necessary requirements: https://github.com/JamshedVesuna/vim-markdown-preview#requirements'
@@ -122,7 +122,7 @@ function! Vim_Markdown_Preview_Local()
   elseif g:vim_markdown_preview_pandoc == 1
     call system('pandoc --smart --standalone "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
   else
-    call system('markdown "' . b:curr_file . '" > vim-markdown-preview.html')
+    call system('Markdown.pl "' . b:curr_file . '" > vim-markdown-preview.html')
   endif
   if v:shell_error
     echo 'Please install the necessary requirements: https://github.com/JamshedVesuna/vim-markdown-preview#requirements'
