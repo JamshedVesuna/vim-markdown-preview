@@ -59,7 +59,7 @@ if !exists("g:vim_markdown_preview_hotkey")
 endif
 
 if !exists("g:vim_markdown_preview_browser_fresh_key")
-    let g:vim_markdown_preview_browser_fresh_key="F5"
+    let g:vim_markdown_preview_browser_fresh_key="ctrl+r"
 endif
 
 function! Vim_Markdown_Preview()
