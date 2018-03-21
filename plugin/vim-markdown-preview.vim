@@ -58,6 +58,10 @@ if !exists("g:vim_markdown_preview_hotkey")
     let g:vim_markdown_preview_hotkey='<C-p>'
 endif
 
+if !exists("g:vim_markdown_preview_browser_refresh_key")
+    let g:vim_markdown_preview_browser_refresh_key="ctrl+r"
+endif
+
 function! Vim_Markdown_Preview()
   let b:curr_file = expand('%:p')
 
@@ -86,7 +90,7 @@ function! Vim_Markdown_Preview()
       let curr_wid = system('xdotool getwindowfocus')
       call system('xdotool windowmap ' . chrome_wid)
       call system('xdotool windowactivate ' . chrome_wid)
-      call system("xdotool key 'ctrl+r'")
+      call system("xdotool key" . g:vim_markdown_preview_browser_refresh_key)
       call system('xdotool windowactivate ' . curr_wid)
     endif
   endif
@@ -140,7 +144,7 @@ function! Vim_Markdown_Preview_Local()
       let curr_wid = system('xdotool getwindowfocus')
       call system('xdotool windowmap ' . chrome_wid)
       call system('xdotool windowactivate ' . chrome_wid)
-      call system("xdotool key 'ctrl+r'")
+      call system("xdotool key" . g:vim_markdown_preview_browser_refresh_key)
       call system('xdotool windowactivate ' . curr_wid)
     endif
   endif

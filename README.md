@@ -104,6 +104,17 @@ Example: Mapping Control M.
 ```vim
 let vim_markdown_preview_hotkey='<C-m>'
 ```
+<a name='browser refresh key'></a>
+### The `vim_markdown_preview_browser_refresh_key` option
+
+By default, this plugin maps `ctrl+r` (Control+r) to be forwarded to the specified (or default) browser. This keybinding does not use vim syntax for keys, the keys are emulated with xdotools.
+
+Defalt: `ctrl+r`
+
+Example: Changing to F5
+```
+let g:vim_markdown_preview_browser_refresh_key='F5'
+```
 
 <a name='browser'></a>
 ### The `vim_markdown_preview_browser` option
