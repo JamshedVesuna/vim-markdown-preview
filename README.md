@@ -49,6 +49,7 @@ Requirements
 ### Mac OS X:
 
 * [Markdown](http://daringfireball.net/projects/markdown/) or [grip](https://github.com/joeyespo/grip) (for [GitHub flavoured markdown](#github))
+    * If using regular Markdown, you can either install via [Brew](https://brew.sh/) with `brew install markdown` or download the `Markdown.pl` script at the link above, add it to your path and then use the `vim_markdown_preview_perl` option documented in the [Options](#perl) section below.
     * If using Grip, put `let vim_markdown_preview_github=1` in your `.vimrc` file
 * [Safari](https://www.apple.com/safari/)
 
