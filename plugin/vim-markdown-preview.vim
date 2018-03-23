@@ -69,14 +69,22 @@ function! Vim_Markdown_Preview()
     call system('pandoc --standalone "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
   else
     call system('markdown "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
+    if g:vim_markdown_preview_browser == 'firefox'
+      " prepend html title, allowing xdotool to find the browser when updating
+      call system('echo -e "<title>vim-markdown-preview.html</title>\n$(cat /tmp/vim-markdown-preview.html)" > /tmp/vim-markdown-preview.html')
+    endif
   endif
   if v:shell_error
     echo 'Please install the necessary requirements: https://github.com/JamshedVesuna/vim-markdown-preview#requirements'
   endif
 
   if g:vmp_osname == 'unix'
-    let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - " . g:vim_markdown_preview_browser . "'")
-    if !chrome_wid
+    if g:vim_markdown_preview_browser == 'firefox'
+      let browser_wid = system("xdotool search --name 'vim-markdown-preview.html'")
+    else
+      let browser_wid = system("xdotool search --name 'vim-markdown-preview.html - " . g:vim_markdown_preview_browser . "'")
+    endif
+    if !browser_wid
       if g:vim_markdown_preview_use_xdg_open == 1
         call system('xdg-open /tmp/vim-markdown-preview.html 1>/dev/null 2>/dev/null &')
       else
@@ -84,8 +92,8 @@ function! Vim_Markdown_Preview()
       endif
     else
       let curr_wid = system('xdotool getwindowfocus')
-      call system('xdotool windowmap ' . chrome_wid)
-      call system('xdotool windowactivate ' . chrome_wid)
+      call system('xdotool windowmap ' . browser_wid)
+      call system('xdotool windowactivate ' . browser_wid)
       call system("xdotool key 'ctrl+r'")
       call system('xdotool windowactivate ' . curr_wid)
     endif
