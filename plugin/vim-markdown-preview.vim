@@ -75,7 +75,12 @@ function! Vim_Markdown_Preview()
   endif
 
   if g:vmp_osname == 'unix'
-    let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - " . g:vim_markdown_preview_browser . "'")
+    if g:vim_markdown_preview_browser == "Firefox Quantum"
+        let chrome_wid = system("xdotool search --name '" . expand('%:t:r') . " - Mozilla Firefox'")
+    else
+        let chrome_wid = system("xdotool search --name 'vim-markdown-preview.html - " . g:vim_markdown_preview_browser . "'")
+    endif
+
     if !chrome_wid
       if g:vim_markdown_preview_use_xdg_open == 1
         call system('xdg-open /tmp/vim-markdown-preview.html 1>/dev/null 2>/dev/null &')
