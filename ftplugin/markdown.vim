@@ -3,7 +3,7 @@
 "   git@github.com:JamshedVesuna/vim-markdown-preview.git
 "============================================================
 
-let g:vmp_script_path = resolve(expand('<sfile>:p:h'))
+let g:vmp_script_path = resolve(expand('<sfile>:p:h') . '/..')
 
 let g:vmp_osname = 'Unidentified'
 
