@@ -48,8 +48,14 @@ elseif g:vim_markdown_preview_toggle == 1
   :exec 'map <buffer> ' . g:vim_markdown_preview_hotkey . ' :call vim_markdown_preview#preview_local()<CR>'
 elseif g:vim_markdown_preview_toggle == 2
   "Display images - Automatically call vim_markdown_preview#preview_local() on buffer write
-  autocmd BufWritePost <buffer> :call vim_markdown_preview#preview_local()
+  augroup vim_markdown_preview
+    autocmd!
+    autocmd BufWritePost <buffer> :call vim_markdown_preview#preview_local()
+  augroup END
 elseif g:vim_markdown_preview_toggle == 3
   "Automatically call vim_markdown_preview#preview() on buffer write
-  autocmd BufWritePost <buffer> :call vim_markdown_preview#preview()
+  augroup vim_markdown_preview
+    autocmd!
+    autocmd BufWritePost <buffer> :call vim_markdown_preview#preview()
+  augroup END
 endif
