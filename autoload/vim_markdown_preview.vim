@@ -3,7 +3,7 @@
 "   git@github.com:JamshedVesuna/vim-markdown-preview.git
 "============================================================
 
-let g:vmp_script_path = resolve(expand('<sfile>:p:h'))
+let g:vmp_script_path = resolve(expand('<sfile>:p:h') . '/..')
 
 let g:vmp_osname = 'Unidentified'
 
@@ -22,43 +22,7 @@ elseif has('unix')
   endif
 endif
 
-if !exists("g:vim_markdown_preview_browser")
-  if g:vmp_osname == 'mac'
-    let g:vim_markdown_preview_browser = 'Safari'
-  else
-    let g:vim_markdown_preview_browser = 'Google Chrome'
-  endif
-endif
-
-if !exists("g:vim_markdown_preview_temp_file")
-  let g:vim_markdown_preview_temp_file = 0
-endif
-
-if !exists("g:vim_markdown_preview_toggle")
-  let g:vim_markdown_preview_toggle = 0
-endif
-
-if !exists("g:vim_markdown_preview_github")
-  let g:vim_markdown_preview_github = 0
-endif
-
-if !exists("g:vim_markdown_preview_perl")
-  let g:vim_markdown_preview_perl = 0
-endif
-
-if !exists("g:vim_markdown_preview_pandoc")
-  let g:vim_markdown_preview_pandoc = 0
-endif
-
-if !exists("g:vim_markdown_preview_use_xdg_open")
-    let g:vim_markdown_preview_use_xdg_open = 0
-endif
-
-if !exists("g:vim_markdown_preview_hotkey")
-    let g:vim_markdown_preview_hotkey='<C-p>'
-endif
-
-function! Vim_Markdown_Preview()
+function! vim_markdown_preview#preview()
   let b:curr_file = expand('%:p')
 
   if g:vim_markdown_preview_github == 1
@@ -112,7 +76,7 @@ endfunction
 
 
 "Renders html locally and displays images
-function! Vim_Markdown_Preview_Local()
+function! vim_markdown_preview#preview_local()
   let b:curr_file = expand('%:p')
 
   if g:vim_markdown_preview_github == 1
@@ -163,18 +127,3 @@ function! Vim_Markdown_Preview_Local()
     call system('rm vim-markdown-preview.html')
   endif
 endfunction
-
-if g:vim_markdown_preview_toggle == 0
-  "Maps vim_markdown_preview_hotkey to Vim_Markdown_Preview()
-  :exec 'autocmd Filetype markdown,md map <buffer> ' . g:vim_markdown_preview_hotkey . ' :call Vim_Markdown_Preview()<CR>'
-elseif g:vim_markdown_preview_toggle == 1
-  "Display images - Maps vim_markdown_preview_hotkey to Vim_Markdown_Preview_Local() - saves the html file locally
-  "and displays images in path
-  :exec 'autocmd Filetype markdown,md map <buffer> ' . g:vim_markdown_preview_hotkey . ' :call Vim_Markdown_Preview_Local()<CR>'
-elseif g:vim_markdown_preview_toggle == 2
-  "Display images - Automatically call Vim_Markdown_Preview_Local() on buffer write
-  autocmd BufWritePost *.markdown,*.md :call Vim_Markdown_Preview_Local()
-elseif g:vim_markdown_preview_toggle == 3
-  "Automatically call Vim_Markdown_Preview() on buffer write
-  autocmd BufWritePost *.markdown,*.md :call Vim_Markdown_Preview()
-endif
