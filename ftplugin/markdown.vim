@@ -39,23 +39,20 @@ if !exists("g:vim_markdown_preview_hotkey")
     let g:vim_markdown_preview_hotkey='<C-p>'
 endif
 
-if g:vim_markdown_preview_toggle == 0
-  "Maps vim_markdown_preview_hotkey to vim_markdown_preview#preview()
-  :exec 'map <buffer> ' . g:vim_markdown_preview_hotkey . ' :call vim_markdown_preview#preview()<CR>'
-elseif g:vim_markdown_preview_toggle == 1
-  "Display images - Maps vim_markdown_preview_hotkey to vim_markdown_preview#preview_local() - saves the html file locally
-  "and displays images in path
-  :exec 'map <buffer> ' . g:vim_markdown_preview_hotkey . ' :call vim_markdown_preview#preview_local()<CR>'
-elseif g:vim_markdown_preview_toggle == 2
-  "Display images - Automatically call vim_markdown_preview#preview_local() on buffer write
-  augroup vim_markdown_preview
-    autocmd!
+augroup vim_markdown_preview
+  autocmd!
+  if g:vim_markdown_preview_toggle == 0
+    "Maps vim_markdown_preview_hotkey to vim_markdown_preview#preview()
+    :exec 'map <buffer> ' . g:vim_markdown_preview_hotkey . ' :call vim_markdown_preview#preview()<CR>'
+  elseif g:vim_markdown_preview_toggle == 1
+    "Display images - Maps vim_markdown_preview_hotkey to vim_markdown_preview#preview_local() - saves the html file locally
+    "and displays images in path
+    :exec 'map <buffer> ' . g:vim_markdown_preview_hotkey . ' :call vim_markdown_preview#preview_local()<CR>'
+  elseif g:vim_markdown_preview_toggle == 2
+    "Display images - Automatically call vim_markdown_preview#preview_local() on buffer write
     autocmd BufWritePost <buffer> :call vim_markdown_preview#preview_local()
-  augroup END
-elseif g:vim_markdown_preview_toggle == 3
-  "Automatically call vim_markdown_preview#preview() on buffer write
-  augroup vim_markdown_preview
-    autocmd!
+  elseif g:vim_markdown_preview_toggle == 3
+    "Automatically call vim_markdown_preview#preview() on buffer write
     autocmd BufWritePost <buffer> :call vim_markdown_preview#preview()
-  augroup END
-endif
+  endif
+augroup END
