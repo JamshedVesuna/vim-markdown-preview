@@ -95,7 +95,7 @@ function! Vim_Markdown_Preview()
     if g:vim_markdown_preview_browser == "Google Chrome"
       let b:vmp_preview_in_browser = system('osascript "' . g:vmp_search_script . '"')
       if b:vmp_preview_in_browser == 1
-        call system('open -a "' . g:vim_markdown_preview_browser . '" -g vim-markdown-preview.html')
+        call system('open -a "' . g:vim_markdown_preview_browser . '" -g /tmp/vim-markdown-preview.html')
       else
         call system('osascript "' . g:vmp_activate_script . '"')
       endif
