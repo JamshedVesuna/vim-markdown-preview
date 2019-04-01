@@ -15,6 +15,7 @@ Vim Markdown Preview
     - [Github Flavoured Markdown](#github)
     - [Markdown.pl](#perl)
     - [Pandoc](#pandoc)
+    - [Pandoc CSS](#pandoc_css)
     - [Use xdg-open](#xdg)
 - [Behind the Scenes](#behind-the-scenes)
 
@@ -162,6 +163,17 @@ Default: `0`
 Example: Use Pandoc to render HTML.
 ```vim
 let vim_markdown_preview_pandoc=1
+```
+
+<a name='pandoc_css'></a>
+### The `vim_markdown_preview_pandoc_css` option
+If you use pandoc to render HTML, you can specify a CSS file with this option.
+
+Default: `''`
+
+Example: Specify a CSS file for HTML.
+```vim
+let vim_markdown_preview_pandoc_css='/absolute/path/to/file.css'
 ```
 
 <a name='xdg'></a>
