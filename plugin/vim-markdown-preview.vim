@@ -68,7 +68,8 @@ function! Vim_Markdown_Preview()
   elseif g:vim_markdown_preview_pandoc == 1
     call system('pandoc --standalone "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
   else
-    call system('markdown "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
+    call system('echo "<head><title>vim-markdown-preview.html</title><meta charset=\"utf-8\"/></head>" > /tmp/vim-markdown-preview.html')
+    call system('markdown "' . b:curr_file . '" >> /tmp/vim-markdown-preview.html')
   endif
   if v:shell_error
     echo 'Please install the necessary requirements: https://github.com/JamshedVesuna/vim-markdown-preview#requirements'
