@@ -61,6 +61,11 @@ endif
 function! Vim_Markdown_Preview()
   let b:curr_file = expand('%:p')
 
+  if !filereadable(b:curr_file)
+    let b:curr_file = "/tmp/vim-markdown-preview.md"
+    write! /tmp/vim-markdown-preview.md
+  endif
+
   if g:vim_markdown_preview_github == 1
     call system('grip "' . b:curr_file . '" --export /tmp/vim-markdown-preview.html --title vim-markdown-preview.html')
   elseif g:vim_markdown_preview_perl == 1
