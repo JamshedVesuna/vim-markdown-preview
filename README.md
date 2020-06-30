@@ -105,6 +105,11 @@ Example: Mapping Control M.
 let vim_markdown_preview_hotkey='<C-m>'
 ```
 
+Alternatively, you can map a custom command to start the preview. Example:
+```vim
+nmap <silent> <leader>mp :call Vim_Markdown_Preview()<CR>
+```
+
 <a name='browser'></a>
 ### The `vim_markdown_preview_browser` option
 
