@@ -12,6 +12,7 @@ Vim Markdown Preview
     - [Hotkey](#hotkey)
     - [Browser](#browser)
     - [Temp File](#temp)
+    - [Temp Delay](#tempdelay)
     - [Github Flavoured Markdown](#github)
     - [Markdown.pl](#perl)
     - [Pandoc](#pandoc)
@@ -128,6 +129,20 @@ Default: `0`
 Example: Remove the rendered preview.
 ```vim
 let vim_markdown_preview_temp_file=1
+```
+
+<a name='tempdelay'></a>
+### The `vim_markdown_preview_temp_delay` option
+
+The temp file might get deleted too early, when your browser needs a longer time to rendered html file. The browser then shows an errors. This option let's you increase the delay between preview invocation and temp file deletion.
+
+Default: `200m`
+
+Examples: Sleep for 2 seconds
+```vim
+let vim_markdown_preview_temp_delay='2'
+" or in milliseconds
+let vim_markdown_preview_temp_delay='2000m'
 ```
 
 <a name='github'></a>
