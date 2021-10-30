@@ -34,6 +34,10 @@ if !exists("g:vim_markdown_preview_temp_file")
   let g:vim_markdown_preview_temp_file = 0
 endif
 
+if !exists("g:vim_markdown_preview_temp_delay")
+  let g:vim_markdown_preview_temp_delay = '200m'
+endif
+
 if !exists("g:vim_markdown_preview_toggle")
   let g:vim_markdown_preview_toggle = 0
 endif
@@ -105,7 +109,7 @@ function! Vim_Markdown_Preview()
   endif
 
   if g:vim_markdown_preview_temp_file == 1
-    sleep 200m
+    execute 'sleep ' . g:vim_markdown_preview_temp_delay
     call system('rm /tmp/vim-markdown-preview.html')
   endif
 endfunction
@@ -159,7 +163,7 @@ function! Vim_Markdown_Preview_Local()
   endif
 
   if g:vim_markdown_preview_temp_file == 1
-    sleep 200m
+    execute 'sleep ' . g:vim_markdown_preview_temp_delay
     call system('rm vim-markdown-preview.html')
   endif
 endfunction
